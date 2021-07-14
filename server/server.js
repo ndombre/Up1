@@ -163,7 +163,12 @@ function create_app(config) {
   var app = express();
   app.locals.config = config
   app.use('', express.static(config.path.client));
-  app.use('/i', express.static(config.path.i));
+  app.use('/i', express.static(config.path.i, {
+    setHeaders: function(res, path) {
+      res.set("X-Content-Type-Options", "nosniff");
+      res.type("application/octet-stream");
+    }
+  }));
   app.post('/up', handle_upload);
   app.get('/del', handle_delete);
   return app
