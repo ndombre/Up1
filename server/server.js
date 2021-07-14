@@ -216,6 +216,10 @@ function init(config) {
         console.info('Started server at https://%s:%s', this.address().address, this.address().port);
       });
   }
+
+  if (config.delete_key == "") {
+    console.warn("No delete_key is set, please edit the configuration file.");
+  }
 }
 
 function main(configpath) {
