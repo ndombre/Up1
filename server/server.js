@@ -91,7 +91,7 @@ function handle_delete(req, res) {
         return;
     }
     var delhmac = crypto.createHmac('sha256', config.delete_key)
-                        .update(req.query.ident)
+                        .update("" + req.query.ident)
                         .digest('hex');
     if (req.query.ident.length !== 22) {
         res.send('{"error": "Ident length is incorrect", "code": 3}');
